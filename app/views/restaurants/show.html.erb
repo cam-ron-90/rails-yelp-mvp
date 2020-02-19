@@ -1,0 +1,34 @@
+<h1><%= @restaurant.name %></h1>
+
+<h3>Reviews</h3>
+<div class="container">
+  <% if @restaurant.reviews.empty? %>
+    <p>No Reviews</p>
+  <% else %>
+    <% @restaurant.reviews.each do |review| %>
+      <p>
+        <%= review.content %> - rating:
+        <strong> <%= review.rating %> </strong>
+      </p>
+    <% end %>
+  <% end %>
+</div>
+
+<h3>Details</h3>
+<div class="container">
+  <p>Cuisine: <%= @restaurant.category %></p>
+  <p>Address: <%= @restaurant.address %></p>
+  <p>Phone: <%= @restaurant.phone_number %></p>
+</div>
+
+<%= link_to 'Home', restaurants_path, class:'btn btn-primary' %>
+<br>
+<br>
+<h2>Add New Review</h2>
+<div class="container">
+  <%= simple_form_for [@restaurant, Review.new] do |f| %>
+    <%= f.input :content %>
+    <%= f.input :rating %>
+    <%= f.submit %>
+  <% end %>
+</div>
